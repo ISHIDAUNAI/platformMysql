@@ -1,0 +1,16 @@
+zx:
+  post: 8580
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 1
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/platform?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+  common:
+    static-file-path: F://ZXHealthFile
+    static-url: /assets
+  sys:
+    user:
+      photo: ${zx.common.static-url}/sys/user/photo/

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhixiang.health.modules.sys.mapper.SysDeptMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zhixiang.health.modules.sys.model.entity.SysDept">
+        <id column="id" property="id" />
+
+        <result column="parent_id" property="parentId" />
+        <result column="name" property="name" />
+        <result column="name_simple" property="nameSimple" />
+        <result column="name_py" property="namePy" />
+        <result column="name_wb" property="nameWb" />
+        <result column="type" property="type" />
+        <result column="grade" property="grade" />
+        <result column="code" property="code" />
+        <result column="sort" property="sort" />
+        <result column="relation_name" property="relationName" />
+        <result column="relation_phone1" property="relationPhone1" />
+        <result column="relation_phone2" property="relationPhone2" />
+        <result column="relation_mobile" property="relationMobile" />
+        <result column="relation_address" property="relationAddress" />
+
+        <result column="create_date" property="createDate" />
+        <result column="create_by" property="createBy" />
+        <result column="update_date" property="updateDate" />
+        <result column="update_by" property="updateBy" />
+        <result column="remark" property="remark" />
+        <result column="delete_state" property="deleteState" />
+    </resultMap>
+
+    <select id="listTreeDto" resultType="com.zhixiang.health.modules.sys.model.dto.SysDeptTreeDto">
+        SELECT
+            id as id, parent_id as parentId, name as name, name_simple as nameSimple, name_py as namePy, name_wb as nameWb,
+            type as type, grade as grade, code as code, sort as sort,
+            relation_name as relationName, relation_phone1 as relationPhone1, relation_phone2 as relationPhone2,
+            relation_mobile as relationMobile, relation_address as relationAddress
+        FROM sys_dept
+        WHERE delete_state = 0
+        ORDER BY sort
+    </select>
+
+    <select id="checkCode" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM sys_dept
+        WHERE delete_state = 0
+        AND code = #{code}
+        <if test=" id != '' and id != null">
+            AND id != #{id}
+        </if>
+    </select>
+
+</mapper>
